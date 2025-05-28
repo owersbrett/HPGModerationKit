@@ -6,7 +6,7 @@ public protocol MediaModerationService {
     func validateText(_ text: String) -> Bool
 }
 
-public final class HPGModerationKit: MediaModerationService {
+public final class HPGModerationKit: MediaModerationService, Sendable {
     public let bannedWords: Set<String>
     public init() {
         self.bannedWords = BannedWords.wordsSet
