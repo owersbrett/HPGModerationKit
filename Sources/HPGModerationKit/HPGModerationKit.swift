@@ -8,21 +8,8 @@ public protocol MediaModerationService {
 
 public final class HPGModerationKit: MediaModerationService {
     public let bannedWords: Set<String>
-
     public init() {
-        guard let url = Bundle.module.url(forResource: "bad-words", withExtension: "txt"),
-              let contents = try? String(contentsOf: url) else {
-            print("⚠️ Warning: Could not load bad-words.txt file. Using empty banned words list.")
-            self.bannedWords = []
-            return
-        }
-
-        self.bannedWords = Set(
-            contents
-                .components(separatedBy: .newlines)
-                .map { $0.lowercased().trimmingCharacters(in: .whitespacesAndNewlines) }
-                .filter { !$0.isEmpty }
-        )
+        self.bannedWords = BannedWords.wordsSet
     }
     
     // Test initializer with custom banned words

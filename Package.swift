@@ -18,17 +18,11 @@ let package = Package(
             name: "HPGModerationKit",
             dependencies: [
                 .product(name: "NSFWDetector", package: "NSFWDetector")
-            ],
-            resources: [
-                .process("bad-words.txt")
             ]
         ),
         .testTarget(
             name: "HPGModerationKitTests",
-            dependencies: ["HPGModerationKit"],
-            resources: [
-                .process("Resources/bad-words.txt")
-            ]
+            dependencies: ["HPGModerationKit"]
         ),
     ]
 )
