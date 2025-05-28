@@ -22,7 +22,8 @@ public final class HPGModerationKit: MediaModerationService {
             NSFWDetector.shared.check(image: image) { result in
                 switch result {
                 case .success(let confidence):
-                    let threshold: Float = 0.7
+                    let threshold: Float = 0.9
+                    print(confidence)
                     continuation.resume(returning: confidence < threshold)
                 case .error(let error):
                     continuation.resume(throwing: error)
