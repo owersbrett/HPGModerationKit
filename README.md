@@ -12,3 +12,5 @@ HPGModerationKit/
 │           └── ImageResizer.swift
 ├── Tests/
 │   └── HPGModerationKitTests/
+
+There is an issue
