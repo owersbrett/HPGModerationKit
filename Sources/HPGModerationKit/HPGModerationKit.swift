@@ -2,7 +2,7 @@ import UIKit
 import NSFWDetector
 
 public protocol MediaModerationService {
-    func validateImage(_ image: UIImage) async throws -> Float
+    func validateImage(_ image: UIImage) async throws -> Bool
     func validateText(_ text: String) -> Bool
 }
 
@@ -17,12 +17,12 @@ public final class HPGModerationKit: MediaModerationService {
         self.bannedWords = testBannedWords
     }
 
-    public func validateImage(_ image: UIImage) async throws -> Float {
+    public func validateImage(_ image: UIImage) async throws -> Bool {
         return try await withCheckedThrowingContinuation { continuation in
             NSFWDetector.shared.check(image: image) { result in
                 switch result {
                 case .success(let confidence):
-                    continuation.resume(returning: confidence)
+                    continuation.resume(returning: confidence < 0.1)
                 case .error(let error):
                     continuation.resume(throwing: error)
                 }
